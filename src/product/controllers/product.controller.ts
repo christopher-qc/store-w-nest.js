@@ -13,7 +13,7 @@ import {
 
 import { ParseIntPipe } from '../../common/parse-int/parse-int.pipe';
 import ProductsService from '../services/product.service';
-import { CreateProductDto, UpdateProductDto } from '../../dtos/products.dtos';
+import { CreateProductDto, UpdateProductDto } from '../dtos/products.dtos';
 // import { Response } from 'express';
 
 @Controller('products')
