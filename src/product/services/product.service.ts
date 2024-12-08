@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { Product } from '../entities/product/product';
-import { CreateProductDto, UpdateProductDto } from '../dtos/products.dtos';
+import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
 
 @Injectable()
 export class ProductService {
@@ -34,8 +34,19 @@ export class ProductService {
     },
   ];
 
-  findAll() {
-    return this.products;
+  findAll(querys) {
+    const { limit, page } = querys;
+    const pageNumber = Number(page);
+    const pageSize = Number(limit);
+
+    const validPage = pageNumber > 0 ? pageNumber : 1;
+    const validLimit = pageSize > 0 ? pageSize : 10;
+
+    const startIndex = (validPage - 1) * validLimit;
+    const endIndex = validPage * validLimit;
+
+    const products = this.products.slice(startIndex, endIndex);
+    return products;
   }
 
   findOne(id: number) {

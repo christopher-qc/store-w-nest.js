@@ -16,6 +16,8 @@ async function bootstrap() {
       // se reciben propiedades no permitidas (que no están en el DTO).
       // Si `whitelist` está activado, pero `forbidNonWhitelisted` está desactivado, simplemente las propiedades no permitidas se eliminarían sin generar un error.
       forbidNonWhitelisted: true,
+
+      transform: true,
     }),
   );
 
