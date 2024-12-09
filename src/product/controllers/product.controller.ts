@@ -33,10 +33,6 @@ export class ProductController {
 
   @Post()
   create(@Body() payload: CreateProductDto) {
-    // return {
-    //   message: 'create product',
-    //   payload,
-    // };
     return this.productService.created(payload);
   }
 

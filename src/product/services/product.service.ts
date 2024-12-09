@@ -26,15 +26,12 @@ export class ProductService {
       description: 'Description 1',
       price: 100,
     },
-    {
-      id: 4,
-      name: 'Product 1',
-      description: 'Description 1',
-      price: 100,
-    },
   ];
 
-  findAll(querys) {
+  findAll(querys?) {
+    if (!querys) {
+      return this.products;
+    }
     const { limit, page } = querys;
     const pageNumber = Number(page);
     const pageSize = Number(limit);

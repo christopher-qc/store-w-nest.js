@@ -97,3 +97,45 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+##
+
+##
+
+##
+
+##
+
+##
+
+EJEMPLO DE COMO CREAR UN MODULO
+
+# Genera un módulo 'orders' en el directorio 'orders'.
+
+# El módulo es la base para organizar la lógica de negocio, servicios y controladores relacionados con los pedidos.
+
+nest g module orders --no-spec
+
+# Genera un controlador 'orders' dentro del subdirectorio 'controllers'.
+
+# El controlador manejará las solicitudes HTTP relacionadas con los pedidos.
+
+nest g controller orders/controllers --no-spec
+
+# Genera un servicio 'orders' dentro del subdirectorio 'services'.
+
+# El servicio será el encargado de la lógica de negocio detrás de las operaciones de los pedidos.
+
+nest g service orders/services --no-spec
+
+# Genera una clase 'order' dentro del subdirectorio 'entities'.
+
+# Esta clase representa la estructura de un pedido en la base de datos (por ejemplo, utilizando TypeORM o Sequelize).
+
+nest g class orders/entities/order --no-spec
+
+# Genera una clase 'dto' dentro del subdirectorio 'dto'.
+
+# Los DTO (Data Transfer Objects) se usan para definir las formas de datos que se reciben y envían a través de las APIs.
+
+nest g class orders/dto --no-spec
