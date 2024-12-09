@@ -1,5 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -20,6 +22,17 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  // AGREGAR DOCUMENTACION CON SWAGGER
+
+  const config = new DocumentBuilder()
+    .setTitle('API')
+    .setDescription('CHRIS STORE')
+    .setVersion('1.0')
+    .addTag('cats')
+    .build();
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('docs', app, documentFactory);
 
   // Inicia el servidor en el puerto especificado en el entorno, o en el puerto 3000 por defecto
   await app.listen(process.env.PORT ?? 3000);

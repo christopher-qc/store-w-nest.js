@@ -1,10 +1,11 @@
 import { IsNotEmpty, IsBoolean, IsString, IsUrl } from 'class-validator';
 
-import { PartialType } from '@nestjs/mapped-types';
+import { PartialType, ApiProperty } from '@nestjs/swagger';
 
 export class CreateCategoryDto {
   @IsString()
   @IsNotEmpty()
+  @ApiProperty({ description: 'name of categoty' })
   readonly name: string;
 
   @IsString()
