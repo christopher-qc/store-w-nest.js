@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { User } from '../entities/user/user';
-import { Order } from '../../orders/entities/order/order';
+// import { Order } from '../../orders/entities/order/order';
 import { ProductService } from '../../product/services/product.service';
 import { CreateUserDto, UpdateUserDto } from '../dto/user.dto';
 
@@ -11,44 +11,7 @@ export class UserService {
 
   private counterId = 1;
 
-  private users: User[] = [
-    {
-      id: 1,
-      name: 'Juan',
-      last_name: 'Pérez',
-      fullname: 'Juan Pérez',
-      email: 'juan.perez@example.com',
-      age: 30,
-      isActive: true,
-    },
-    {
-      id: 2,
-      name: 'Ana',
-      last_name: 'Gómez',
-      fullname: 'Ana Gómez',
-      email: 'ana.gomez@example.com',
-      age: 25,
-      isActive: false,
-    },
-    {
-      id: 3,
-      name: 'Carlos',
-      last_name: 'Rodríguez',
-      fullname: 'Carlos Rodríguez',
-      email: 'carlos.rodriguez@example.com',
-      age: 28,
-      isActive: true,
-    },
-    {
-      id: 4,
-      name: 'María',
-      last_name: 'López',
-      fullname: 'María López',
-      email: 'maria.lopez@example.com',
-      age: 35,
-      isActive: true,
-    },
-  ];
+  private users: User[] = [];
 
   findAll(querys) {
     const { limit, page } = querys;
@@ -106,12 +69,12 @@ export class UserService {
     return user;
   }
 
-  getOrdersByUser(id: number): Order {
+  async getOrdersByUser(id: number) {
     const user = this.findOne(id);
     return {
       date: new Date(),
       user,
-      products: this.productService.findAll(),
+      products: await this.productService.findAll(),
     };
   }
 }

@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
 import { lastValueFrom } from 'rxjs';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { HttpModule, HttpService } from '@nestjs/axios';
 import * as Joi from 'joi';
+import { AppDataSource } from './data-source';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { enviroments } from 'enviroments';
 import config from './config';
+import { DatabaseModule } from './database/database.module';
 
 // Category
 import { CategoryModule } from './category/category.module';
@@ -20,10 +23,10 @@ import { OrdersModule } from './orders/orders.module';
 
 // User
 import { UserModule } from './user/user.module';
-import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot(AppDataSource.options),
     ConfigModule.forRoot({
       envFilePath: enviroments[process.env.NODE_ENV] || '.env',
       load: [config],

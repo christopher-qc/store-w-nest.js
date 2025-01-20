@@ -5,6 +5,7 @@ import {
   IsNumber,
   IsBoolean,
   IsPositive,
+  IsDate,
 } from 'class-validator';
 
 import { PartialType } from '@nestjs/swagger';
@@ -16,7 +17,7 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
-  readonly last_name: string;
+  readonly lastname: string;
 
   @IsString()
   readonly fullname: string;
@@ -33,6 +34,10 @@ export class CreateUserDto {
   @IsBoolean()
   @IsNotEmpty()
   readonly isActive: boolean;
+
+  @IsDate()
+  @IsNotEmpty()
+  readonly createdAt: Date;
 }
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {}

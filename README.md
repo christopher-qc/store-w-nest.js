@@ -139,3 +139,11 @@ nest g class orders/entities/order --no-spec
 # Los DTO (Data Transfer Objects) se usan para definir las formas de datos que se reciben y envían a través de las APIs.
 
 nest g class orders/dto --no-spec
+
+# Crear una migracion
+
+npx typeorm migration:create src/migrations/(NombreMigracion)
+
+# Ejecutamos la migracion
+
+npx ts-node -O '{"module":"commonjs"}' node_modules/typeorm/cli.js migration:run -d ./src/data-source.ts

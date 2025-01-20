@@ -1,19 +1,21 @@
 import { Module, Global } from '@nestjs/common';
-
-const API_KEY_DEV = '12345667';
-const API_KEY_PROD = '2432432';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Global()
 @Module({
-  providers: [
-    {
-      provide: 'API_KEY',
-      // Se asigna el valor de la API_KEY dependiendo del entorno. Si el entorno es 'prod',
-      // se usa la clave API_KEY_PROD; de lo contrario, se utiliza API_KEY_DEV.
-      // Esto permite manejar diferentes configuraciones según el entorno de ejecución.
-      useValue: process.env.NODE_ENV === 'prod' ? API_KEY_PROD : API_KEY_DEV,
-    },
+  imports: [
+    TypeOrmModule.forRootAsync({
+      useFactory: () => ({
+        type: 'mysql',
+        host: process.env.NODE_ENV === 'prod' ? 'mysql-prod-host' : 'localhost',
+        username: 'root',
+        password: '1234',
+        database: 'my_database',
+        synchronize: true,
+        autoLoadEntities: true,
+      }),
+    }),
   ],
-  exports: ['API_KEY'],
+  exports: [TypeOrmModule],
 })
 export class DatabaseModule {}
